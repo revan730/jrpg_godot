@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var teleportData = get_node("/root/TeleportData")
+@onready var playerParty = get_node("/root/PlayerParty")
 
 
 # Called when the node enters the scene tree for the first time.
