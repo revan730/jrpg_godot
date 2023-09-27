@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://byfed7p6k0onh"]
+
+[ext_resource type="PackedScene" uid="uid://bhgbrak5ipvta" path="res://worldmap/worldmap.tscn" id="1_ggqqx"]
+[ext_resource type="Script" path="res://trader/trader.gd" id="2_3y21f"]
+[ext_resource type="PackedScene" uid="uid://bajrdxjviepch" path="res://trader/trader_tiles.tscn" id="2_bxqop"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50833"]
+
+[node name="worldmap" instance=ExtResource("1_ggqqx")]
+
+[node name="level" parent="." index="0"]
+script = ExtResource("2_3y21f")
+
+[node name="trader_tiles" parent="level" index="0" instance=ExtResource("2_bxqop")]
+
+[node name="teleport_from_town" type="Node2D" parent="level" index="2"]
+position = Vector2(71.75, 119.5)
+
+[node name="town_tp" type="Area2D" parent="level" index="3"]
+
+[node name="collision" type="CollisionShape2D" parent="level/town_tp" index="0"]
+position = Vector2(71.75, 151.75)
+shape = SubResource("RectangleShape2D_50833")
+
+[connection signal="body_entered" from="level/town_tp" to="level" method="_on_town_tp_body_entered"]

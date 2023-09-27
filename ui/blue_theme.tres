@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://ba76eedavb44n"]
+
+[ext_resource type="FontFile" uid="uid://k06pvk5wihyb" path="res://ui/FreeSansBold.ttf" id="1_k0avo"]
+[ext_resource type="Texture2D" uid="uid://cjabc5udap7xs" path="res://ui/panel_blue.png" id="2_w3jec"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmo4x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3pp6j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ggty"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2vbnf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvhb7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vci1s"]
+texture = ExtResource("2_w3jec")
+
+[resource]
+Button/colors/font_focus_color = Color(0, 1, 0, 1)
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_k0avo")
+Button/styles/disabled = SubResource("StyleBoxEmpty_lmo4x")
+Button/styles/focus = SubResource("StyleBoxEmpty_3pp6j")
+Button/styles/hover = SubResource("StyleBoxEmpty_8ggty")
+Button/styles/normal = SubResource("StyleBoxEmpty_2vbnf")
+Button/styles/pressed = SubResource("StyleBoxEmpty_nvhb7")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_vci1s")

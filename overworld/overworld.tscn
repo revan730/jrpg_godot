@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://dn1y0tdi1yyjj"]
+
+[ext_resource type="PackedScene" uid="uid://bhgbrak5ipvta" path="res://worldmap/worldmap.tscn" id="1_4xf12"]
+[ext_resource type="PackedScene" uid="uid://c88gag7ig6vlt" path="res://overworld/world_tiles.tscn" id="2_xsjvh"]
+[ext_resource type="Script" path="res://overworld/overworld.gd" id="2_yixcu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snswn"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1rtm"]
+size = Vector2(10.5, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljurw"]
+size = Vector2(11.75, 11.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12e8u"]
+size = Vector2(10.75, 10.25)
+
+[node name="worldmap" instance=ExtResource("1_4xf12")]
+
+[node name="level" parent="." index="0"]
+script = ExtResource("2_yixcu")
+
+[node name="world_tiles" parent="level" index="0" instance=ExtResource("2_xsjvh")]
+
+[node name="teleport_from_town" type="Node2D" parent="level" index="1"]
+position = Vector2(308.75, 157)
+
+[node name="town_tp" type="Area2D" parent="level" index="3"]
+
+[node name="collision" type="CollisionShape2D" parent="level/town_tp" index="0"]
+position = Vector2(309.25, 135.5)
+shape = SubResource("RectangleShape2D_snswn")
+
+[node name="dungeon_north_tp" type="Area2D" parent="level" index="4"]
+
+[node name="collision" type="CollisionShape2D" parent="level/dungeon_north_tp" index="0"]
+position = Vector2(234.5, 153.75)
+shape = SubResource("RectangleShape2D_p1rtm")
+
+[node name="dungeon_south_tp" type="Area2D" parent="level" index="5"]
+
+[node name="collision" type="CollisionShape2D" parent="level/dungeon_south_tp" index="0"]
+position = Vector2(170.25, 359.75)
+shape = SubResource("RectangleShape2D_p1rtm")
+
+[node name="teleport_from_dungeon_north" type="Node2D" parent="level" index="6"]
+position = Vector2(234.25, 168.25)
+
+[node name="teleport_from_dungeon_south" type="Node2D" parent="level" index="7"]
+position = Vector2(169.75, 375.75)
+
+[node name="teleport_from_sand_dng_north" type="Node2D" parent="level" index="8"]
+position = Vector2(98, 104)
+
+[node name="teleport_from_sand_dng_south" type="Node2D" parent="level" index="9"]
+position = Vector2(91, 330.5)
+
+[node name="sand_dng_north_tp" type="Area2D" parent="level" index="10"]
+
+[node name="collision" type="CollisionShape2D" parent="level/sand_dng_north_tp" index="0"]
+position = Vector2(76, 103.75)
+shape = SubResource("RectangleShape2D_ljurw")
+
+[node name="sand_dng_south_tp" type="Area2D" parent="level" index="11"]
+
+[node name="collision" type="CollisionShape2D" parent="level/sand_dng_south_tp" index="0"]
+position = Vector2(91.5, 312)
+shape = SubResource("RectangleShape2D_12e8u")
+
+[node name="MarginContainer" parent="gui/main_menu_container" index="0"]
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[connection signal="body_entered" from="level/town_tp" to="level" method="_on_town_tp_body_entered"]
+[connection signal="body_entered" from="level/dungeon_north_tp" to="level" method="_on_dungeon_north_tp_body_entered"]
+[connection signal="body_entered" from="level/dungeon_south_tp" to="level" method="_on_dungeon_south_tp_body_entered"]
+[connection signal="body_entered" from="level/sand_dng_north_tp" to="level" method="_on_sand_dng_north_tp_body_entered"]
+[connection signal="body_entered" from="level/sand_dng_south_tp" to="level" method="_on_sand_dng_south_tp_body_entered"]
+[connection signal="pressed" from="gui/main_menu_container/MarginContainer/VBoxContainer/quit_btn" to="gui/main_menu_container" method="_on_quit_btn_pressed"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhgbrak5ipvta"]
+
+[ext_resource type="Script" path="res://worldmap/worldmap.gd" id="1_4ycl0"]
+[ext_resource type="Theme" uid="uid://ba76eedavb44n" path="res://ui/blue_theme.tres" id="2_uk17v"]
+[ext_resource type="PackedScene" uid="uid://dnvmiwcyro2tb" path="res://player/player.tscn" id="3_j51l3"]
+[ext_resource type="Script" path="res://worldmap/main_menu_container.gd" id="4_otnq1"]
+
+[node name="worldmap" type="Node2D"]
+process_mode = 3
+scale = Vector2(4, 4)
+script = ExtResource("1_4ycl0")
+
+[node name="level" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="player" parent="level" instance=ExtResource("3_j51l3")]
+position = Vector2(234, 179)
+move_speed = 175
+
+[node name="gui" type="CanvasLayer" parent="."]
+
+[node name="main_menu_container" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_uk17v")
+script = ExtResource("4_otnq1")
+worldMapManager = NodePath("../..")
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/main_menu_container"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/main_menu_container/MarginContainer"]
+layout_mode = 2
+
+[node name="resume_btn" type="Button" parent="gui/main_menu_container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="quit_btn" type="Button" parent="gui/main_menu_container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="gui/main_menu_container/MarginContainer/VBoxContainer/resume_btn" to="gui/main_menu_container" method="_on_resume_btn_pressed"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://skd1h7p63goo"]
+
+[ext_resource type="PackedScene" uid="uid://bhgbrak5ipvta" path="res://worldmap/worldmap.tscn" id="1_ve8x5"]
+[ext_resource type="Script" path="res://wizard/wizard.gd" id="2_oy8b4"]
+[ext_resource type="PackedScene" uid="uid://5bi0btmg01e3" path="res://wizard/wizard_tiles.tscn" id="2_yjcx4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lo3c3"]
+
+[node name="worldmap" instance=ExtResource("1_ve8x5")]
+
+[node name="level" parent="." index="0"]
+script = ExtResource("2_oy8b4")
+
+[node name="wizard_tiles" parent="level" index="0" instance=ExtResource("2_yjcx4")]
+
+[node name="teleport_from_town" type="Node2D" parent="level" index="2"]
+position = Vector2(71.25, 120.5)
+
+[node name="town_tp" type="Area2D" parent="level" index="3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level/town_tp" index="0"]
+position = Vector2(72.25, 150.5)
+shape = SubResource("RectangleShape2D_lo3c3")
+
+[connection signal="body_entered" from="level/town_tp" to="level" method="_on_town_tp_body_entered"]

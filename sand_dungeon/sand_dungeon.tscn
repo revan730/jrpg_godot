@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://x7hucx7sbiak"]
+
+[ext_resource type="PackedScene" uid="uid://bhgbrak5ipvta" path="res://worldmap/worldmap.tscn" id="1_4qurg"]
+[ext_resource type="PackedScene" uid="uid://cd13qf07g8mvh" path="res://sand_dungeon/sand_dungeon_tiles.tscn" id="2_65lrf"]
+[ext_resource type="Script" path="res://sand_dungeon/sand_dungeon.gd" id="2_h66r0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tk4a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4elqx"]
+size = Vector2(106, 20)
+
+[node name="worldmap" instance=ExtResource("1_4qurg")]
+
+[node name="level" parent="." index="0"]
+script = ExtResource("2_h66r0")
+
+[node name="sand_dungeon_tiles" parent="level" index="0" instance=ExtResource("2_65lrf")]
+
+[node name="teleport_from_north" type="Node2D" parent="level" index="2"]
+position = Vector2(215.75, 14.5)
+
+[node name="teleport_from_south" type="Node2D" parent="level" index="3"]
+position = Vector2(233.5, 282.75)
+
+[node name="north_tp" type="Area2D" parent="level" index="4"]
+
+[node name="collision" type="CollisionShape2D" parent="level/north_tp" index="0"]
+position = Vector2(216, -8.5)
+shape = SubResource("RectangleShape2D_8tk4a")
+
+[node name="south_tp" type="Area2D" parent="level" index="5"]
+
+[node name="collision" type="CollisionShape2D" parent="level/south_tp" index="0"]
+position = Vector2(236.75, 308)
+shape = SubResource("RectangleShape2D_4elqx")
+
+[connection signal="body_entered" from="level/north_tp" to="level" method="_on_north_tp_body_entered"]
+[connection signal="body_entered" from="level/south_tp" to="level" method="_on_south_tp_body_entered"]

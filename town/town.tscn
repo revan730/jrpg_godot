@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://ktsdbx7pke8f"]
+
+[ext_resource type="PackedScene" uid="uid://bhgbrak5ipvta" path="res://worldmap/worldmap.tscn" id="1_kre0s"]
+[ext_resource type="PackedScene" uid="uid://3egqecmmtkrh" path="res://town/town_tiles.tscn" id="2_1yapj"]
+[ext_resource type="Script" path="res://town/town.gd" id="2_2lfgt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ywtd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tv4uh"]
+size = Vector2(13.5, 11.5)
+
+[node name="worldmap" instance=ExtResource("1_kre0s")]
+
+[node name="level" parent="." index="0"]
+script = ExtResource("2_2lfgt")
+
+[node name="town_tiles" parent="level" index="0" instance=ExtResource("2_1yapj")]
+
+[node name="overworld_tp" type="Area2D" parent="level" index="2"]
+
+[node name="collision" type="CollisionShape2D" parent="level/overworld_tp" index="0"]
+position = Vector2(151.5, 214)
+shape = SubResource("RectangleShape2D_4ywtd")
+
+[node name="teleport_from_overworld" type="Node2D" parent="level" index="3"]
+position = Vector2(152.25, 184)
+
+[node name="trader_tp" type="Area2D" parent="level" index="4"]
+position = Vector2(103.75, 104.5)
+
+[node name="collision" type="CollisionShape2D" parent="level/trader_tp" index="0"]
+position = Vector2(0.25, -2)
+shape = SubResource("RectangleShape2D_tv4uh")
+
+[node name="wizard_tp" type="Area2D" parent="level" index="5"]
+position = Vector2(103.75, 104.5)
+
+[node name="collision" type="CollisionShape2D" parent="level/wizard_tp" index="0"]
+position = Vector2(128.5, -1.75)
+shape = SubResource("RectangleShape2D_tv4uh")
+
+[node name="teleport_from_trader" type="Node2D" parent="level" index="6"]
+position = Vector2(104.25, 123.25)
+
+[node name="teleport_from_wizard" type="Node2D" parent="level" index="7"]
+position = Vector2(232.5, 126.25)
+
+[connection signal="body_entered" from="level/overworld_tp" to="level" method="_on_overworld_tp_body_entered"]
+[connection signal="body_entered" from="level/trader_tp" to="level" method="_on_trader_tp_body_entered"]
+[connection signal="body_entered" from="level/wizard_tp" to="level" method="_on_wizard_tp_body_entered"]
