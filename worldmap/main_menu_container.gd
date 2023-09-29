@@ -26,7 +26,8 @@ func _on_quit_btn_pressed():
 
 
 func _input(event):
-	if (event.is_action_pressed("down")):
-		$MarginContainer/VBoxContainer.find_prev_valid_focus().grab_focus()
-	elif (event.is_action_pressed("up")):
-		$MarginContainer/VBoxContainer.find_next_valid_focus().grab_focus()
+	if self.visible:
+		if (event.is_action_pressed("down")):
+			$MarginContainer/VBoxContainer.find_prev_valid_focus().grab_focus()
+		elif (event.is_action_pressed("up")):
+			$MarginContainer/VBoxContainer.find_next_valid_focus().grab_focus()

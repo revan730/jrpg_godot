@@ -15,4 +15,4 @@ func _init():
 	self.info = "Dull knife"
 
 func _to_string():
-	return "%s (+%s)" % self.item_name % self.dmg
+	return "%s (+%s)" % [self.item_name, self.dmg]

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://ba76eedavb44n"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://ba76eedavb44n"]
 
 [ext_resource type="FontFile" uid="uid://k06pvk5wihyb" path="res://ui/FreeSansBold.ttf" id="1_k0avo"]
 [ext_resource type="Texture2D" uid="uid://cjabc5udap7xs" path="res://ui/panel_blue.png" id="2_w3jec"]
@@ -13,6 +13,14 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvhb7"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uis45"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xrt0o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5j2tj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k30wm"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vci1s"]
 texture = ExtResource("2_w3jec")
 
@@ -25,4 +33,13 @@ Button/styles/focus = SubResource("StyleBoxEmpty_3pp6j")
 Button/styles/hover = SubResource("StyleBoxEmpty_8ggty")
 Button/styles/normal = SubResource("StyleBoxEmpty_2vbnf")
 Button/styles/pressed = SubResource("StyleBoxEmpty_nvhb7")
+ItemList/colors/font_color = Color(1, 1, 1, 1)
+ItemList/colors/font_selected_color = Color(0, 0.878431, 0.878431, 1)
+ItemList/colors/guide_color = Color(0.701961, 0.701961, 0.701961, 0)
+ItemList/font_sizes/font_size = 18
+ItemList/fonts/font = ExtResource("1_k0avo")
+ItemList/styles/focus = SubResource("StyleBoxEmpty_uis45")
+ItemList/styles/panel = SubResource("StyleBoxEmpty_xrt0o")
+ItemList/styles/selected = SubResource("StyleBoxEmpty_5j2tj")
+ItemList/styles/selected_focus = SubResource("StyleBoxEmpty_k30wm")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_vci1s")

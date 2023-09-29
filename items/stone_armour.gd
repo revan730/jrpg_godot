@@ -1,5 +1,7 @@
 extends Armour
 
+class_name StoneArmour
+
 func _init():
 	self.item_name = "Stone armour"
 	self.def = 25

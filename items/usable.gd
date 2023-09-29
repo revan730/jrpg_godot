@@ -7,7 +7,7 @@ extends Item
 class_name Usable
 
 func _to_string():
-	return "%s (%s G)" % self.item_name % self.cost
+	return "%s (%s G)" % [item_name, cost]
 	
 func apply_effect(target: Npc):
 	"""

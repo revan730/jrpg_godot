@@ -15,5 +15,5 @@ func _init():
 	self.info = "Simple coat"
 
 func _to_string():
-	return "%s (+%s)" % self.item_name % self.def
+	return "%s (+%s)" % [item_name, def]
 
