@@ -4,6 +4,8 @@ class_name Ranger
 
 func _init():
 	self.name = "Jaden"
+	self.role = "Ranger"
+	self.portrait = preload("res://player/portrait_ranger.png")
 	self.intelligence = 10
 	self.strength = 15
 	self.dexterity = 10

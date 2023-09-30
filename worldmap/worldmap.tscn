@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhgbrak5ipvta"]
+[gd_scene load_steps=10 format=3 uid="uid://bhgbrak5ipvta"]
 
 [ext_resource type="Script" path="res://worldmap/worldmap.gd" id="1_4ycl0"]
 [ext_resource type="Theme" uid="uid://ba76eedavb44n" path="res://ui/blue_theme.tres" id="2_uk17v"]
+[ext_resource type="Script" path="res://worldmap/party_info_container.gd" id="3_6i1dp"]
 [ext_resource type="PackedScene" uid="uid://dnvmiwcyro2tb" path="res://player/player.tscn" id="3_j51l3"]
+[ext_resource type="Texture2D" uid="uid://dwgqbwk5uvyd2" path="res://player/portrait_warrior.png" id="4_8obsh"]
 [ext_resource type="Script" path="res://worldmap/main_menu_container.gd" id="4_otnq1"]
 [ext_resource type="Script" path="res://worldmap/select_character_container.gd" id="5_kehay"]
 [ext_resource type="Script" path="res://worldmap/inventory_container.gd" id="5_rideo"]
@@ -22,8 +24,244 @@ move_speed = 175
 
 [node name="gui" type="CanvasLayer" parent="."]
 
+[node name="party_info_container" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_6i1dp")
+worldMapManager = NodePath("../..")
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/party_info_container"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/party_info_container/MarginContainer"]
+layout_mode = 2
+
+[node name="portait_name" type="HBoxContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="portrait" type="TextureRect" parent="gui/party_info_container/MarginContainer/VBoxContainer/portait_name"]
+layout_mode = 2
+texture = ExtResource("4_8obsh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer/portait_name"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/portait_name/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Name"
+
+[node name="class" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/portait_name/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Class"
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="stats_container" type="HBoxContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="left_column" type="VBoxContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="hp_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "HP"
+
+[node name="hp_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="mp_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "MP"
+
+[node name="mp_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="level_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "LVL"
+
+[node name="level_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="strength_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Strength"
+
+[node name="strength_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="dexterity_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Dexterity"
+
+[node name="dexterity_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="intelligence_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Intelligence"
+
+[node name="intelligence_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="durability_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Durability"
+
+[node name="durability_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="damage_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Damage"
+
+[node name="damage_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="defence_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Defence"
+
+[node name="defence_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="experience_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Experience
+"
+
+[node name="experience_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/left_column/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="mid_column" type="VBoxContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/mid_column"]
+layout_mode = 2
+columns = 2
+
+[node name="weapon_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/mid_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Weapon
+"
+
+[node name="weapon_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/mid_column/GridContainer"]
+layout_mode = 2
+text = "N/A"
+
+[node name="armour_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/mid_column/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Armour
+"
+
+[node name="armour_value" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/mid_column/GridContainer"]
+layout_mode = 2
+text = "N/A"
+
+[node name="MarginContainer2" type="MarginContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="right_column" type="VBoxContainer" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container"]
+layout_mode = 2
+
+[node name="spells_label" type="Label" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/right_column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.878431, 0.878431, 1)
+theme_override_colors/font_outline_color = Color(0, 0.878431, 0.878431, 1)
+text = "Spells"
+
+[node name="spells_list" type="ItemList" parent="gui/party_info_container/MarginContainer/VBoxContainer/stats_container/right_column"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+allow_search = false
+auto_height = true
+item_count = 2
+item_0/text = "Spell 1"
+item_1/text = "Spell 2"
+
 [node name="inventory_container" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]
 process_mode = 2
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -82,6 +320,7 @@ item_1/text = "test2"
 
 [node name="select_character_container" type="PanelContainer" parent="gui"]
 process_mode = 2
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -120,6 +359,7 @@ item_3/text = "Character 4"
 
 [node name="message_box" type="PanelContainer" parent="gui"]
 process_mode = 2
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

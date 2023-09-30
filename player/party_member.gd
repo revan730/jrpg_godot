@@ -4,7 +4,9 @@ Represents base game class to be derived by actual classes like Warrior
 
 class_name PartyMember
 
+var role: String
 var name: String
+var portrait: Texture2D = preload("res://player/portrait_warrior.png")
 var level: int = 1
 var max_level: int = 25
 var hp: int
@@ -37,7 +39,7 @@ var hp_multiplier: int
 var mp_multiplier: int
 var dmg_multiplier: int
 var exp_multiplier: int
-var base_evasion: int = 0.05
+var base_evasion: float = 0.05
 
 func level_up():
 	self.level += 1
@@ -51,6 +53,8 @@ func level_up():
 func recalculate_stats():
 	self.max_hp = self.durability * self.hp_multiplier
 	self.hp = self.max_hp
+	self.max_mp = self.intelligence * self.mp_multiplier
+	self.mp = self.max_mp
 	self.damage = self.strength * self.dmg_multiplier + self.weapon.dmg
 	self.defence = self.armour.def
 	self.evasion = self.base_evasion * self.dexterity / 10

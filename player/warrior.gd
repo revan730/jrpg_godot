@@ -4,6 +4,8 @@ class_name Warrior
 
 func _init():
 	self.name = "Cid"
+	self.role = "Warrior"
+	var portrait: Texture2D = preload("res://player/portrait_warrior.png")
 	self.intelligence = 10
 	self.strength = 10
 	self.dexterity = 15
