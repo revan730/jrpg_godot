@@ -80,4 +80,5 @@ func _on_message_box_closed():
 	self.add_child(t)
 	t.start()
 	await t.timeout
+	t.queue_free()
 	self.regrab_focus()

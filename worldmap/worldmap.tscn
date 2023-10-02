@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhgbrak5ipvta"]
+[gd_scene load_steps=11 format=3 uid="uid://bhgbrak5ipvta"]
 
 [ext_resource type="Script" path="res://worldmap/worldmap.gd" id="1_4ycl0"]
 [ext_resource type="Theme" uid="uid://ba76eedavb44n" path="res://ui/blue_theme.tres" id="2_uk17v"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://worldmap/select_character_container.gd" id="5_kehay"]
 [ext_resource type="Script" path="res://worldmap/inventory_container.gd" id="5_rideo"]
 [ext_resource type="Script" path="res://worldmap/message_box.gd" id="6_tsbn0"]
+[ext_resource type="Script" path="res://worldmap/trader.gd" id="8_rst8v"]
 
 [node name="worldmap" type="Node2D"]
 process_mode = 3
@@ -26,6 +27,7 @@ move_speed = 175
 
 [node name="party_info_container" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]
 process_mode = 2
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -356,6 +358,62 @@ item_0/text = "Character 1"
 item_1/text = "Character 2"
 item_2/text = "Character 3"
 item_3/text = "Character 4"
+
+[node name="trader" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.5
+offset_top = -64.5
+offset_right = 139.5
+offset_bottom = 64.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_rst8v")
+worldMapManager = NodePath("../..")
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/trader"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/trader/MarginContainer"]
+layout_mode = 2
+
+[node name="description_and_gold" type="HBoxContainer" parent="gui/trader/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="item_description" type="Label" parent="gui/trader/MarginContainer/VBoxContainer/description_and_gold"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Item description"
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/trader/MarginContainer/VBoxContainer/description_and_gold"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="gold_label" type="Label" parent="gui/trader/MarginContainer/VBoxContainer/description_and_gold"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.901961, 0.901961, 1)
+theme_override_font_sizes/font_size = 18
+text = "Gold"
+
+[node name="gold_value" type="Label" parent="gui/trader/MarginContainer/VBoxContainer/description_and_gold"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="inventory_items" type="ItemList" parent="gui/trader/MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_text_lines = 10
+auto_height = true
+item_count = 2
+item_0/text = "test"
+item_1/text = "test2"
 
 [node name="message_box" type="PanelContainer" parent="gui"]
 process_mode = 2
