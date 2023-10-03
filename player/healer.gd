@@ -5,6 +5,7 @@ class_name Healer
 func _init():
 	self.name = "Rilay"
 	self.role = "Healer"
+	self.spells.append(Heal.new())
 	self.portrait = preload("res://player/portrait_healer.png")
 	self.intelligence = 15
 	self.strength = 5

@@ -6,6 +6,7 @@ signal toggle_game_paused(is_paused: bool)
 signal toggle_inventory_opened(is_opened: bool)
 signal toggle_party_info_opened(is_opened: bool)
 signal toggle_trader_opened(is_opened: bool)
+signal toggle_wizard_opened(is_opened: bool)
 
 var game_paused: bool = false:
 	get:
@@ -16,7 +17,7 @@ var game_paused: bool = false:
 var inventory_opened: bool = false
 var party_info_opened: bool = false
 var trader_opened: bool = false
-
+var wizard_opened: bool = false
 
 func _input(event):
 	if (event.is_action_pressed("pause")):
@@ -38,7 +39,7 @@ func _input(event):
 
 
 func _on_trader_body_entered(_body):
-	if !inventory_opened and !trader_opened:
+	if !inventory_opened and !party_info_opened and !trader_opened:
 		var paused: bool = get_tree().paused
 		game_paused = !paused
 		trader_opened = game_paused
@@ -48,3 +49,16 @@ func _on_trader_body_entered(_body):
 func _on_trader_closed():
 	game_paused = false
 	trader_opened = false
+
+
+func _on_wizard_body_entered(_body):
+	if !inventory_opened and !party_info_opened and !wizard_opened:
+		var paused: bool = get_tree().paused
+		game_paused = !paused
+		wizard_opened = game_paused
+		emit_signal("toggle_wizard_opened", game_paused)
+
+
+func _on_wizard_closed():
+	game_paused = false
+	wizard_opened = false

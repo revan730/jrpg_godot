@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhgbrak5ipvta"]
+[gd_scene load_steps=12 format=3 uid="uid://bhgbrak5ipvta"]
 
 [ext_resource type="Script" path="res://worldmap/worldmap.gd" id="1_4ycl0"]
 [ext_resource type="Theme" uid="uid://ba76eedavb44n" path="res://ui/blue_theme.tres" id="2_uk17v"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://worldmap/inventory_container.gd" id="5_rideo"]
 [ext_resource type="Script" path="res://worldmap/message_box.gd" id="6_tsbn0"]
 [ext_resource type="Script" path="res://worldmap/trader.gd" id="8_rst8v"]
+[ext_resource type="Script" path="res://worldmap/wizard.gd" id="9_dbjnm"]
 
 [node name="worldmap" type="Node2D"]
 process_mode = 3
@@ -415,6 +416,62 @@ item_count = 2
 item_0/text = "test"
 item_1/text = "test2"
 
+[node name="wizard" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.5
+offset_top = -64.5
+offset_right = 139.5
+offset_bottom = 64.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_dbjnm")
+worldMapManager = NodePath("../..")
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/wizard"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/wizard/MarginContainer"]
+layout_mode = 2
+
+[node name="description_and_gold" type="HBoxContainer" parent="gui/wizard/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="item_description" type="Label" parent="gui/wizard/MarginContainer/VBoxContainer/description_and_gold"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Item description"
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/wizard/MarginContainer/VBoxContainer/description_and_gold"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="gold_label" type="Label" parent="gui/wizard/MarginContainer/VBoxContainer/description_and_gold"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.901961, 0.901961, 1)
+theme_override_font_sizes/font_size = 18
+text = "Gold"
+
+[node name="gold_value" type="Label" parent="gui/wizard/MarginContainer/VBoxContainer/description_and_gold"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="inventory_items" type="ItemList" parent="gui/wizard/MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_text_lines = 10
+auto_height = true
+item_count = 2
+item_0/text = "test"
+item_1/text = "test2"
+
 [node name="message_box" type="PanelContainer" parent="gui"]
 process_mode = 2
 visible = false
@@ -486,4 +543,7 @@ text = "Quit"
 [connection signal="character_selected" from="gui/select_character_container" to="gui/inventory_container" method="_on_select_character_container_character_selected"]
 [connection signal="selection_canceled" from="gui/select_character_container" to="gui/inventory_container" method="_on_select_character_container_selection_canceled"]
 [connection signal="item_activated" from="gui/select_character_container/MarginContainer/HBoxContainer/character_list" to="gui/select_character_container" method="_on_character_list_item_activated"]
+[connection signal="closed" from="gui/wizard" to="." method="_on_wizard_closed"]
+[connection signal="item_activated" from="gui/wizard/MarginContainer/VBoxContainer/inventory_items" to="gui/wizard" method="_on_inventory_items_item_activated"]
+[connection signal="item_selected" from="gui/wizard/MarginContainer/VBoxContainer/inventory_items" to="gui/wizard" method="_on_inventory_items_item_selected"]
 [connection signal="pressed" from="gui/main_menu_container/MarginContainer/VBoxContainer/resume_btn" to="gui/main_menu_container" method="_on_resume_btn_pressed"]

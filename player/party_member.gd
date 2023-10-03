@@ -16,7 +16,7 @@ var max_mp: int
 var damage: int
 var defence: int
 var evasion: int
-# TODO: Spells
+var spells: Array[Spell]
 var armour: Armour = preload("res://items/armour.gd").new()
 var weapon: Weapon = preload("res://items/weapon.gd").new()
 var experience: int:
@@ -40,6 +40,13 @@ var mp_multiplier: int
 var dmg_multiplier: int
 var exp_multiplier: int
 var base_evasion: float = 0.05
+
+enum Character {
+	Warrior,
+	Mage,
+	Healer,
+	Ranger
+}
 
 func level_up():
 	self.level += 1

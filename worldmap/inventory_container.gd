@@ -16,8 +16,10 @@ func reload_inventory_items():
 		inventory_items_list.add_item(item.to_string())
 	inventory_items_list.select(0)
 	item_description_label.text = playerParty.inventory_items[0].info
-	gold_label.text = str(playerParty.gold)
+	self.update_gold_count()
 	
+func update_gold_count():
+	gold_label.text = str(playerParty.gold)
 
 func _ready():
 	inventory_items_list.allow_search = false
@@ -49,6 +51,7 @@ func choose_item(index: int):
 func _on_world_manager_toggle_inventory_opened(is_opened: bool):
 	if (is_opened):
 		show()
+		self.update_gold_count()
 		self.regrab_focus()
 	else:
 		hide()

@@ -3,7 +3,7 @@ extends PanelContainer
 signal closed
 
 @onready var label: Label = get_node("MarginContainer/message")
-@export var text: String:
+var text: String:
 	get:
 		return label.text
 	set(value):

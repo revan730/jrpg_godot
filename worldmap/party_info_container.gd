@@ -29,7 +29,8 @@ var current_party_member: PartyMember
 
 func reload_spells():
 	spells_list.clear()
-	# TODO: Implement, don't forget to make items unselectable
+	for spell in current_party_member.spells:
+		spells_list.add_item(spell.to_string(), null, false)
 
 func reload_stats():
 	hp_label.text = str(current_party_member.hp)

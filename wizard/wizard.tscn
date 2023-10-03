@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://skd1h7p63goo"]
+[gd_scene load_steps=7 format=3 uid="uid://skd1h7p63goo"]
 
 [ext_resource type="PackedScene" uid="uid://bhgbrak5ipvta" path="res://worldmap/worldmap.tscn" id="1_ve8x5"]
 [ext_resource type="Script" path="res://wizard/wizard.gd" id="2_oy8b4"]
 [ext_resource type="PackedScene" uid="uid://5bi0btmg01e3" path="res://wizard/wizard_tiles.tscn" id="2_yjcx4"]
+[ext_resource type="Texture2D" uid="uid://c1132kqqkda5l" path="res://wizard/wizard.png" id="4_x5tbt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lo3c3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ypie1"]
+radius = 17.5
 
 [node name="worldmap" instance=ExtResource("1_ve8x5")]
 
@@ -22,4 +26,23 @@ position = Vector2(71.25, 120.5)
 position = Vector2(72.25, 150.5)
 shape = SubResource("RectangleShape2D_lo3c3")
 
+[node name="wizard" type="Area2D" parent="level" index="4"]
+position = Vector2(70, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level/wizard" index="0"]
+shape = SubResource("CircleShape2D_ypie1")
+
+[node name="Sprite2D" type="Sprite2D" parent="level/wizard" index="1"]
+texture = ExtResource("4_x5tbt")
+
+[node name="trader" parent="gui" index="3"]
+process_mode = 2
+
+[node name="wizard" parent="gui" index="4"]
+process_mode = 2
+
+[node name="message_box" parent="gui" index="5"]
+visible = true
+
 [connection signal="body_entered" from="level/town_tp" to="level" method="_on_town_tp_body_entered"]
+[connection signal="body_entered" from="level/wizard" to="." method="_on_wizard_body_entered"]
