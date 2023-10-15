@@ -23,6 +23,10 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vci1s"]
 texture = ExtResource("2_w3jec")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [resource]
 Button/colors/font_focus_color = Color(0, 1, 0, 1)

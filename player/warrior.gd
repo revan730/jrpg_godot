@@ -6,6 +6,9 @@ func _init():
 	self.name = "Cid"
 	self.role = "Warrior"
 	var portrait: Texture2D = preload("res://player/portrait_warrior.png")
+	self.battle_sprite = Sprite2D.new()
+	self.battle_sprite.texture = preload("res://player/left_2.png")
+	self.battle_sprite.scale = Vector2(4, 4)
 	self.intelligence = 10
 	self.strength = 10
 	self.dexterity = 15

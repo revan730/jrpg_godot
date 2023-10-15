@@ -7,6 +7,7 @@ class_name PartyMember
 var role: String
 var name: String
 var portrait: Texture2D = preload("res://player/portrait_warrior.png")
+var battle_sprite: Sprite2D
 var level: int = 1
 var max_level: int = 25
 var hp: int
@@ -66,3 +67,26 @@ func recalculate_stats():
 	self.defence = self.armour.def
 	self.evasion = self.base_evasion * self.dexterity / 10
 
+func heal(amount):
+	if self.hp > 0:
+		self.hp += amount
+		if self.hp > self.max_hp:
+			self.hp = self.max_hp
+
+func apply_damage(amount: int):
+	if self.hp > 0:
+		if randf() > self.evasion:
+			return false
+		else:
+			var dmg = amount - self.defence
+			if dmg <= self.hp:
+				self.hp -= dmg
+			else:
+				self.hp = 0
+
+func apply_magic_damage(amount: int):
+	if self.hp > 0:
+		if self.hp >= amount:
+			self.hp -= amount
+		else:
+			self.hp = 0

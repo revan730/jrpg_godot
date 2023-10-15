@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 TeleportData="*res://teleport_data.gd"
 PlayerParty="*res://player_party.gd"
+BattleData="*res://battle_data.gd"
 
 [display]
 

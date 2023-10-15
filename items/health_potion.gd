@@ -8,7 +8,7 @@ func _init():
 	self.info = "Restores 20 HP"
 
 func apply_effect(target):
-	target.hp += 20
+	target.heal(20)
 	
 func check_applicable(target):
-	return target.hp > 0
+	return target.hp > 0 and target.hp < target.max_hp

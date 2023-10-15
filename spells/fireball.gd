@@ -9,3 +9,9 @@ func _init():
 	self.info = "Deal 15 points of damage"
 	self.char = PartyMember.Character.Mage
 	self.side = SpellSide.Sides.NPC
+
+func check_applicable(target: Npc):
+	return true
+	
+func apply(target: Npc):
+	target.apply_damage(15)

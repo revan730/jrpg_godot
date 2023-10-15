@@ -9,3 +9,6 @@ func _init():
 	self.info = "Deal 15 points of damage"
 	self.char = 0
 	self.side = SpellSide.Sides.Player
+
+func apply(target):
+	target.apply_magic_damage(15)

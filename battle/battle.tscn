@@ -1,0 +1,205 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv1wdfdrj1l81"]
+
+[ext_resource type="Script" path="res://battle/battle.gd" id="1_0quch"]
+[ext_resource type="Texture2D" uid="uid://blhwubhyye76p" path="res://battle/dungeon1.png" id="2_qc0uo"]
+
+[node name="battle" type="Node2D"]
+script = ExtResource("1_0quch")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground"]
+process_mode = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qc0uo")
+expand_mode = 2
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -78.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="actions_log_bar" type="PanelContainer" parent="ui/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/VBoxContainer/actions_log_bar"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="action" type="Label" parent="ui/VBoxContainer/actions_log_bar/MarginContainer"]
+layout_mode = 2
+text = "Actions made by characters will be showed here"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="enemies" type="PanelContainer" parent="ui/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/VBoxContainer/HBoxContainer/enemies"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="enemy_list" type="ItemList" parent="ui/VBoxContainer/HBoxContainer/enemies/MarginContainer"]
+process_mode = 4
+layout_mode = 2
+theme_override_colors/font_selected_color = Color(0, 1, 0, 1)
+allow_search = false
+auto_height = true
+item_count = 3
+item_0/text = "Enemy 1 10/10 HP 20/20 MP"
+item_1/text = "Enemy 2 10/10 HP 20/20 MP"
+item_2/text = "Enemy 3 10/10 HP 20/20 MP"
+
+[node name="actions" type="PanelContainer" parent="ui/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/VBoxContainer/HBoxContainer/actions"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/VBoxContainer/HBoxContainer/actions/MarginContainer"]
+layout_mode = 2
+
+[node name="attack_btn" type="Button" parent="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Attack"
+
+[node name="magic_btn" type="Button" parent="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Magic
+"
+
+[node name="item_btn" type="Button" parent="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Item"
+
+[node name="flee_btn" type="Button" parent="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Flee"
+
+[node name="items" type="PanelContainer" parent="ui/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/VBoxContainer/HBoxContainer/items"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="items_list" type="ItemList" parent="ui/VBoxContainer/HBoxContainer/items/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_selected_color = Color(0, 1, 0, 1)
+allow_search = false
+auto_height = true
+item_count = 4
+item_0/text = "Item 1"
+item_1/text = "Item 2"
+item_2/text = "Item 3"
+item_3/text = "Item 4"
+
+[node name="spells" type="PanelContainer" parent="ui/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/VBoxContainer/HBoxContainer/spells"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="spells_list" type="ItemList" parent="ui/VBoxContainer/HBoxContainer/spells/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_selected_color = Color(0, 1, 0, 1)
+allow_search = false
+auto_height = true
+item_count = 4
+item_0/text = "Item 1"
+item_1/text = "Item 2"
+item_2/text = "Item 3"
+item_3/text = "Item 4"
+
+[node name="player_party" type="PanelContainer" parent="ui/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/VBoxContainer/HBoxContainer/player_party"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="party_members_list" type="ItemList" parent="ui/VBoxContainer/HBoxContainer/player_party/MarginContainer"]
+process_mode = 4
+layout_mode = 2
+theme_override_colors/font_selected_color = Color(0, 1, 0, 1)
+allow_search = false
+auto_height = true
+item_count = 4
+item_0/text = "Character 1 10/10 HP 20/20 MP"
+item_1/text = "Character 2 10/10 HP 20/20 MP"
+item_2/text = "Character 3 10/10 HP 20/20 MP"
+item_3/text = "Character 4 10/10 HP 20/20 MP"
+
+[node name="enemy_placement_0" type="Node2D" parent="." groups=["enemy_placements"]]
+visibility_layer = 3
+position = Vector2(255, 499)
+
+[node name="enemy_placement_1" type="Node2D" parent="." groups=["enemy_placements"]]
+position = Vector2(255, 582)
+
+[node name="enemy_placement_2" type="Node2D" parent="." groups=["enemy_placements"]]
+position = Vector2(255, 670)
+
+[node name="enemy_placement_3" type="Node2D" parent="." groups=["enemy_placements"]]
+position = Vector2(255, 750)
+
+[node name="player_placement_0" type="Node2D" parent="." groups=["player_placements"]]
+position = Vector2(1600, 499)
+
+[node name="player_placement_1" type="Node2D" parent="." groups=["player_placements"]]
+position = Vector2(1600, 582)
+
+[node name="player_placement_2" type="Node2D" parent="." groups=["player_placements"]]
+position = Vector2(1600, 670)
+
+[node name="player_placement_3" type="Node2D" parent="." groups=["player_placements"]]
+position = Vector2(1600, 750)
+
+[connection signal="pressed" from="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer/attack_btn" to="." method="_on_attack_btn_pressed"]
+[connection signal="pressed" from="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer/magic_btn" to="." method="_on_magic_btn_pressed"]
+[connection signal="pressed" from="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer/item_btn" to="." method="_on_item_btn_pressed"]
+[connection signal="pressed" from="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer/flee_btn" to="." method="_on_flee_btn_pressed"]
+[connection signal="item_activated" from="ui/VBoxContainer/HBoxContainer/items/MarginContainer/items_list" to="." method="_on_items_list_item_activated"]
+[connection signal="item_activated" from="ui/VBoxContainer/HBoxContainer/spells/MarginContainer/spells_list" to="." method="_on_spells_list_item_activated"]

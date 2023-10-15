@@ -9,12 +9,12 @@ class_name Usable
 func _to_string():
 	return "%s (%s G)" % [item_name, cost]
 	
-func apply_effect(target: Npc):
+func apply_effect(target: PartyMember):
 	"""
 	apply item effect on it's target
-	:param target: player or enemy party member
+	:param target: player party member
 	"""
 	pass
 
-func check_applicable(target: Npc):
+func check_applicable(target: PartyMember):
 	pass

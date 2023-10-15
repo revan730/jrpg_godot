@@ -13,3 +13,6 @@ var side: SpellSide.Sides
 
 func _to_string():
 	return "%s (%s MP)" % [name, mp]
+
+func apply(target):
+	pass

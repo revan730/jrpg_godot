@@ -361,6 +361,7 @@ item_2/text = "Character 3"
 item_3/text = "Character 4"
 
 [node name="trader" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -417,6 +418,7 @@ item_0/text = "test"
 item_1/text = "test2"
 
 [node name="wizard" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
