@@ -33,8 +33,12 @@ func character_dialog():
 func apply_selection(index: int, item: Item, character: PartyMember):
 	if item is Weapon:
 		playerParty.inventory_items[index] = character.weapon
-		character.weapon = item
+		character.set_weapon(item)
 		print_debug("Character weapon is now %s" % character.weapon.item_name)
+	if item is Armour:
+		playerParty.inventory_items[index] = character.armour
+		character.set_armour(item)
+		print_debug("Character armour is now %s" % character.armour.item_name)
 	
 func choose_item(index: int):
 	print_debug("Choosing item with index %s" % index)

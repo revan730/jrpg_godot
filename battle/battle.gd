@@ -120,12 +120,7 @@ func select_player_character():
 	
 
 func _ready():
-	battleData.npc_party.append(FireElemental.new())
-	battleData.npc_party[0].name += " A"
-	battleData.npc_party.append(FireElemental.new())
-	battleData.npc_party[1].name += " B"
-	#battleData.npc_party.append(FireElemental.new())
-	#battleData.npc_party[2].name += " C"
+	playerParty.reload_battle_sprites()
 	self.reload_party_members_list()
 	self.reload_party_member_sprites()
 	self.reload_enemy_list()
@@ -233,10 +228,15 @@ func next_turn():
 		var loot_gold_exp = self.calculate_loot_gold_exp()
 		for i in loot_gold_exp.loot:
 			action_log.text = "Received %s!" % i.name
+			playerParty.inventory_items.append(i)
 		action_log.text = "Received %s gold!" % loot_gold_exp.gold
 		action_log.text = "Each party member got %s experience!" % loot_gold_exp.exp
-		# TODO: Pause between logs, apply
+		playerParty.add_exp(loot_gold_exp.exp)
+		# TODO: Pause between logs
 		playerParty.gold += loot_gold_exp.gold
+		battleData.return_from_battle = true
+		battleData.after_battle_cleanup()
+		get_tree().change_scene_to_file(battleData.previous_scene)
 		return
 	
 	enemy_list.deselect_all()
@@ -271,8 +271,9 @@ func action_spell_npc(target_index):
 func action_spell(npc_or_char):
 	print_debug("Applying spell on target %s" % npc_or_char)
 	var spell = playerParty.members[current_player_character].spells[spells_list.get_selected_items()[0]]
-	if spell.check_applicable(npc_or_char):
+	if spell.check_applicable(npc_or_char) and playerParty.members[current_player_character].mp >= spell.mp:
 		spell.apply(npc_or_char)
+		playerParty.members[current_player_character].mp -= spell.mp
 		self.reload_enemy_list()
 		self.reload_enemy_sprites()
 		self.reload_party_members_list()

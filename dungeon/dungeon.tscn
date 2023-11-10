@@ -1,12 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://by1phinehyse3"]
+[gd_scene load_steps=11 format=3 uid="uid://by1phinehyse3"]
 
 [ext_resource type="PackedScene" uid="uid://bhgbrak5ipvta" path="res://worldmap/worldmap.tscn" id="1_wr4in"]
 [ext_resource type="Script" path="res://dungeon/dungeon.gd" id="2_4vb7s"]
 [ext_resource type="PackedScene" uid="uid://bdi7vgfmpqydh" path="res://dungeon/dungeon_tiles.tscn" id="2_cw73b"]
+[ext_resource type="Texture2D" uid="uid://bf0w53lyrdnwi" path="res://npc/water_elemental_map.png" id="4_eqvck"]
+[ext_resource type="Texture2D" uid="uid://d05f0ic46ryb4" path="res://npc/fire_elemental_map.png" id="5_y5cxa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fxqe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hctk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nsyip"]
+radius = 17.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btv37"]
+radius = 17.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bwjxj"]
+radius = 17.5
 
 [node name="worldmap" instance=ExtResource("1_wr4in")]
 
@@ -33,5 +44,35 @@ position = Vector2(247.5, 256)
 position = Vector2(247.75, 276.25)
 shape = SubResource("RectangleShape2D_4hctk")
 
+[node name="water_elemental_central_room" type="Area2D" parent="level" index="6"]
+position = Vector2(216.5, 105)
+
+[node name="Sprite2D" type="Sprite2D" parent="level/water_elemental_central_room" index="0"]
+texture = ExtResource("4_eqvck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level/water_elemental_central_room" index="1"]
+shape = SubResource("CircleShape2D_nsyip")
+
+[node name="water_elemental_west_room" type="Area2D" parent="level" index="7"]
+position = Vector2(18, 71.25)
+
+[node name="Sprite2D" type="Sprite2D" parent="level/water_elemental_west_room" index="0"]
+texture = ExtResource("4_eqvck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level/water_elemental_west_room" index="1"]
+shape = SubResource("CircleShape2D_btv37")
+
+[node name="fire_elemental_south_room" type="Area2D" parent="level" index="8"]
+position = Vector2(247.75, 248.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="level/fire_elemental_south_room" index="0"]
+texture = ExtResource("5_y5cxa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level/fire_elemental_south_room" index="1"]
+shape = SubResource("CircleShape2D_bwjxj")
+
 [connection signal="body_entered" from="level/first_island_tp" to="level" method="_on_first_island_tp_body_entered"]
 [connection signal="body_entered" from="level/second_island_tp" to="level" method="_on_second_island_tp_body_entered"]
+[connection signal="body_entered" from="level/water_elemental_central_room" to="level" method="_on_water_elemental_central_room_body_entered"]
+[connection signal="body_entered" from="level/water_elemental_west_room" to="level" method="_on_water_elemental_west_room_body_entered"]
+[connection signal="body_entered" from="level/fire_elemental_south_room" to="level" method="_on_fire_elemental_south_room_body_entered"]

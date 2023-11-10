@@ -2,14 +2,17 @@ extends PartyMember
 
 class_name Healer
 
+func reload_battle_sprite():
+	self.battle_sprite = Sprite2D.new()
+	self.battle_sprite.texture = preload("res://player/battle_idle_healer.png")
+	self.battle_sprite.scale = Vector2(4, 4)
+
 func _init():
 	self.name = "Rilay"
 	self.role = "Healer"
 	self.spells.append(Heal.new())
 	self.portrait = preload("res://player/portrait_healer.png")
-	self.battle_sprite = Sprite2D.new()
-	self.battle_sprite.texture = preload("res://player/battle_idle_healer.png")
-	self.battle_sprite.scale = Vector2(4, 4)
+	self.reload_battle_sprite()
 	self.intelligence = 15
 	self.strength = 5
 	self.dexterity = 10

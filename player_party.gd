@@ -6,6 +6,10 @@ static var inventory_items: Array[Item] = [HealthPotion.new(), FireBlade.new(), 
 static var gold: int = 1000
 static var members: Array[PartyMember] = [Warrior.new(), Mage.new(), Healer.new(), Ranger.new()]
 
+func reload_battle_sprites():
+	for m in members:
+		m.reload_battle_sprite()
+
 func add_spell(spell: Spell):
 	if members[spell.char]:
 		members[spell.char].spells.append(spell)
@@ -36,3 +40,7 @@ func remove_item(i: Item):
 		print_debug("Trying to remove item not found in inventory")
 	else:
 		inventory_items.remove_at(index)
+		
+func add_exp(exp: int):
+	for m in members:
+		m.add_exp(exp)

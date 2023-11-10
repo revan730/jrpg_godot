@@ -51,7 +51,7 @@ enum Character {
 
 func level_up():
 	self.level += 1
-	self.up_exp = self.level * self.exp_multiplier
+	self.up_experience = self.level * self.exp_multiplier
 	self.intelligence += self.int_increment
 	self.strength += self.str_increment
 	self.dexterity += self.dex_increment
@@ -90,3 +90,16 @@ func apply_magic_damage(amount: int):
 			self.hp -= amount
 		else:
 			self.hp = 0
+
+func add_exp(exp: int):
+	experience += exp
+	if experience >= up_experience:
+		level_up()
+
+func set_weapon(weapon: Weapon):
+	self.weapon = weapon
+	self.recalculate_stats()
+
+func set_armour(armour: Armour):
+	self.armour = armour
+	self.recalculate_stats()
