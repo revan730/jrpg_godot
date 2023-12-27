@@ -42,6 +42,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="action" type="Label" parent="ui/VBoxContainer/actions_log_bar/MarginContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Actions made by characters will be showed here"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ui/VBoxContainer"]
@@ -64,6 +65,7 @@ theme_override_constants/margin_bottom = 20
 process_mode = 4
 layout_mode = 2
 theme_override_colors/font_selected_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 24
 allow_search = false
 auto_height = true
 item_count = 3
@@ -164,6 +166,7 @@ theme_override_constants/margin_bottom = 20
 process_mode = 4
 layout_mode = 2
 theme_override_colors/font_selected_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 24
 allow_search = false
 auto_height = true
 item_count = 4
@@ -186,16 +189,16 @@ position = Vector2(255, 670)
 position = Vector2(255, 750)
 
 [node name="player_placement_0" type="Node2D" parent="." groups=["player_placements"]]
-position = Vector2(1600, 499)
+position = Vector2(1600, 489)
 
 [node name="player_placement_1" type="Node2D" parent="." groups=["player_placements"]]
-position = Vector2(1600, 582)
+position = Vector2(1600, 572)
 
 [node name="player_placement_2" type="Node2D" parent="." groups=["player_placements"]]
-position = Vector2(1600, 670)
+position = Vector2(1600, 660)
 
 [node name="player_placement_3" type="Node2D" parent="." groups=["player_placements"]]
-position = Vector2(1600, 750)
+position = Vector2(1600, 740)
 
 [connection signal="pressed" from="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer/attack_btn" to="." method="_on_attack_btn_pressed"]
 [connection signal="pressed" from="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer/magic_btn" to="." method="_on_magic_btn_pressed"]

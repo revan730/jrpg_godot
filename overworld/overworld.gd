@@ -6,17 +6,22 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	match teleportData.teleported_from:
-		teleportData.Teleports.TOWN_OVERWORLD:
-			$player.global_position = $teleport_from_town.global_position
-		teleportData.Teleports.DUNGEON_NORTH:
-			$player.global_position = $teleport_from_dungeon_north.global_position
-		teleportData.Teleports.DUNGEON_SOUTH:
-			$player.global_position = $teleport_from_dungeon_south.global_position
-		teleportData.Teleports.SAND_DUNGEON_NORTH:
-			$player.global_position = $teleport_from_sand_dng_north.global_position
-		teleportData.Teleports.SAND_DUNGEON_SOUTH:
-			$player.global_position = $teleport_from_sand_dng_south.global_position
+	if (teleportData.position_from_save):
+		$player.global_position = teleportData.position_from_save
+		teleportData.position_from_save = Vector2.ZERO
+		get_tree().paused = false
+	else:
+		match teleportData.teleported_from:
+			teleportData.Teleports.TOWN_OVERWORLD:
+				$player.global_position = $teleport_from_town.global_position
+			teleportData.Teleports.DUNGEON_NORTH:
+				$player.global_position = $teleport_from_dungeon_north.global_position
+			teleportData.Teleports.DUNGEON_SOUTH:
+				$player.global_position = $teleport_from_dungeon_south.global_position
+			teleportData.Teleports.SAND_DUNGEON_NORTH:
+				$player.global_position = $teleport_from_sand_dng_north.global_position
+			teleportData.Teleports.SAND_DUNGEON_SOUTH:
+				$player.global_position = $teleport_from_sand_dng_south.global_position
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -4,13 +4,18 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	match teleportData.teleported_from:
-		teleportData.Teleports.OVERWORLD_TOWN:
-			$player.global_position = $teleport_from_overworld.global_position
-		teleportData.Teleports.TRADER_TOWN:
-			$player.global_position = $teleport_from_trader.global_position
-		teleportData.Teleports.WIZARD_TOWN:
-			$player.global_position = $teleport_from_wizard.global_position
+	if (teleportData.position_from_save):
+		$player.global_position = teleportData.position_from_save
+		teleportData.position_from_save = Vector2.ZERO
+		get_tree().paused = false
+	else:
+		match teleportData.teleported_from:
+			teleportData.Teleports.OVERWORLD_TOWN:
+				$player.global_position = $teleport_from_overworld.global_position
+			teleportData.Teleports.TRADER_TOWN:
+				$player.global_position = $teleport_from_trader.global_position
+			teleportData.Teleports.WIZARD_TOWN:
+				$player.global_position = $teleport_from_wizard.global_position
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

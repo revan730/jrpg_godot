@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhgbrak5ipvta"]
+[gd_scene load_steps=14 format=3 uid="uid://bhgbrak5ipvta"]
 
 [ext_resource type="Script" path="res://worldmap/worldmap.gd" id="1_4ycl0"]
 [ext_resource type="Theme" uid="uid://ba76eedavb44n" path="res://ui/blue_theme.tres" id="2_uk17v"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://worldmap/message_box.gd" id="6_tsbn0"]
 [ext_resource type="Script" path="res://worldmap/trader.gd" id="8_rst8v"]
 [ext_resource type="Script" path="res://worldmap/wizard.gd" id="9_dbjnm"]
+[ext_resource type="Script" path="res://worldmap/load_save_menu_container.gd" id="12_b1fwa"]
+[ext_resource type="Script" path="res://worldmap/load_or_save_box.gd" id="13_vdr1k"]
 
 [node name="worldmap" type="Node2D"]
 process_mode = 3
@@ -533,11 +535,105 @@ layout_mode = 2
 
 [node name="resume_btn" type="Button" parent="gui/main_menu_container/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../quit_btn")
+focus_neighbor_bottom = NodePath("../save_load_btn")
+focus_next = NodePath("../save_load_btn")
+focus_previous = NodePath("../quit_btn")
 text = "Resume"
+
+[node name="save_load_btn" type="Button" parent="gui/main_menu_container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../resume_btn")
+focus_neighbor_bottom = NodePath("../quit_btn")
+focus_next = NodePath("../quit_btn")
+focus_previous = NodePath("../resume_btn")
+text = "Save / Load"
 
 [node name="quit_btn" type="Button" parent="gui/main_menu_container/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../save_load_btn")
+focus_neighbor_bottom = NodePath("../resume_btn")
+focus_next = NodePath("../resume_btn")
+focus_previous = NodePath("../save_load_btn")
 text = "Quit"
+
+[node name="load_save_menu_container" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -70.0
+offset_right = 126.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_uk17v")
+script = ExtResource("12_b1fwa")
+worldMapManager = NodePath("../..")
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/load_save_menu_container"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="HBoxContainer" parent="gui/load_save_menu_container/MarginContainer"]
+layout_mode = 2
+
+[node name="save_slots_list" type="ItemList" parent="gui/load_save_menu_container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+allow_search = false
+max_text_lines = 10
+auto_height = true
+item_count = 6
+item_0/text = "Save 1 "
+item_1/text = "Save 2"
+item_2/text = "Save 3"
+item_3/text = "Save 4"
+item_4/text = "Save 5"
+item_5/text = "Save 6"
+
+[node name="load_or_save_box" type="PanelContainer" parent="gui"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -35.0
+offset_right = 111.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.996973, 1)
+script = ExtResource("13_vdr1k")
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/load_or_save_box"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="gui/load_or_save_box/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="load_btn" type="Button" parent="gui/load_or_save_box/MarginContainer/HBoxContainer"]
+layout_mode = 2
+focus_neighbor_right = NodePath("../save_btn")
+text = "Load"
+
+[node name="save_btn" type="Button" parent="gui/load_or_save_box/MarginContainer/HBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../load_btn")
+text = "Save"
 
 [connection signal="open_character_select" from="gui/inventory_container" to="gui/select_character_container" method="_on_inventory_container_open_character_select"]
 [connection signal="item_activated" from="gui/inventory_container/MarginContainer/VBoxContainer/inventory_items" to="gui/inventory_container" method="_on_inventory_items_item_activated"]
@@ -549,3 +645,14 @@ text = "Quit"
 [connection signal="item_activated" from="gui/wizard/MarginContainer/VBoxContainer/inventory_items" to="gui/wizard" method="_on_inventory_items_item_activated"]
 [connection signal="item_selected" from="gui/wizard/MarginContainer/VBoxContainer/inventory_items" to="gui/wizard" method="_on_inventory_items_item_selected"]
 [connection signal="pressed" from="gui/main_menu_container/MarginContainer/VBoxContainer/resume_btn" to="gui/main_menu_container" method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="gui/main_menu_container/MarginContainer/VBoxContainer/save_load_btn" to="gui/main_menu_container" method="_on_save_load_btn_pressed"]
+[connection signal="closed" from="gui/load_save_menu_container" to="." method="_on_load_save_menu_container_closed"]
+[connection signal="load" from="gui/load_save_menu_container" to="." method="_on_load_save_menu_container_load"]
+[connection signal="open_save_load_select" from="gui/load_save_menu_container" to="gui/load_or_save_box" method="_on_load_save_menu_container_open_save_load_select"]
+[connection signal="save" from="gui/load_save_menu_container" to="." method="_on_load_save_menu_container_save"]
+[connection signal="item_activated" from="gui/load_save_menu_container/MarginContainer/VBoxContainer/save_slots_list" to="gui/load_save_menu_container" method="_on_save_slots_list_item_activated"]
+[connection signal="load" from="gui/load_or_save_box" to="gui/load_save_menu_container" method="_on_load_or_save_box_load"]
+[connection signal="save" from="gui/load_or_save_box" to="gui/load_save_menu_container" method="_on_load_or_save_box_save"]
+[connection signal="selection_canceled" from="gui/load_or_save_box" to="gui/load_save_menu_container" method="_on_load_or_save_box_selection_canceled"]
+[connection signal="pressed" from="gui/load_or_save_box/MarginContainer/HBoxContainer/load_btn" to="gui/load_or_save_box" method="_on_load_btn_pressed"]
+[connection signal="pressed" from="gui/load_or_save_box/MarginContainer/HBoxContainer/save_btn" to="gui/load_or_save_box" method="_on_save_btn_pressed"]

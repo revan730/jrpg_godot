@@ -32,3 +32,9 @@ func enter_battle(player_party_placement: Vector2, remove_enemy: String, npcs: A
 	self.set_battle_npcs(npcs)
 	previous_scene = get_tree().current_scene.scene_file_path
 	get_tree().change_scene_to_file("res://battle/battle.tscn")
+	
+func serialize_for_save():
+	return { "removed_placements_dungeon": removed_placements_dungeon }
+	
+func load_from_save(data):
+	removed_placements_dungeon.assign(data.removed_placements_dungeon)

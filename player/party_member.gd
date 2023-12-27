@@ -50,12 +50,15 @@ enum Character {
 }
 
 func level_up():
-	self.level += 1
-	self.up_experience = self.level * self.exp_multiplier
-	self.intelligence += self.int_increment
-	self.strength += self.str_increment
-	self.dexterity += self.dex_increment
-	self.durability += self.dur_increment
+	var levels_upped = 0
+	while self.experience >= self.up_experience:
+		self.level += 1
+		self.up_experience = self.level * self.exp_multiplier
+		levels_upped += 1
+	self.intelligence += self.int_increment * levels_upped
+	self.strength += self.str_increment * levels_upped
+	self.dexterity += self.dex_increment * levels_upped
+	self.durability += self.dur_increment * levels_upped
 	self.recalculate_stats()
 	
 func recalculate_stats():
@@ -103,3 +106,17 @@ func set_weapon(weapon: Weapon):
 func set_armour(armour: Armour):
 	self.armour = armour
 	self.recalculate_stats()
+	
+
+func serialize_for_save():
+	var spells_serialized = []
+	for s in spells:
+		spells_serialized.append(s.get_script().get_path())
+		
+	return {
+		"class_path": self.get_script().get_path(),
+		"spells": spells_serialized,
+		"armour": armour.get_script().get_path(),
+		"weapon": weapon.get_script().get_path(),
+		"experience": experience
+	}

@@ -44,3 +44,39 @@ func remove_item(i: Item):
 func add_exp(exp: int):
 	for m in members:
 		m.add_exp(exp)
+		
+func serialize_members():
+	var serialized = []
+	for m in members:
+		serialized.append(m.serialize_for_save())
+	
+	return serialized
+
+func serialize_for_save():
+	var inventory_items_serialized = []
+	for i in inventory_items:
+		inventory_items_serialized.append(i.get_script().get_path())
+	return {
+		"inventory_items": inventory_items_serialized,
+		"gold": gold,
+		"members": self.serialize_members()
+	}
+
+func load_from_save(data):
+	gold = data.gold
+	inventory_items.clear()
+	for i in data.inventory_items:
+		var item = load(i).new()
+		inventory_items.append(item)
+	# TODO: Reset inventory item list in inventory UI
+	members.clear()
+	for m in data.members:
+		var member = load(m.class_path).new()
+		member.experience = m.experience
+		member.armour = load(m.armour).new()
+		member.weapon = load(m.weapon).new()
+		member.spells.clear()
+		for s in m.spells:
+			member.spells.append(load(s).new())
+		members.append(member)
+	print_debug(members)

@@ -20,14 +20,8 @@ func _on_world_manager_toggle_game_paused(is_paused: bool):
 func _on_resume_btn_pressed():
 	worldMapManager.game_paused = false
 
+func _on_save_load_btn_pressed():
+	worldMapManager.open_save_load_menu()
 
 func _on_quit_btn_pressed():
 	get_tree().quit()
-
-
-func _input(event):
-	if self.visible:
-		if (event.is_action_pressed("down")):
-			$MarginContainer/VBoxContainer.find_prev_valid_focus().grab_focus()
-		elif (event.is_action_pressed("up")):
-			$MarginContainer/VBoxContainer.find_next_valid_focus().grab_focus()

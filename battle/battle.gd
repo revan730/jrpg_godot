@@ -84,19 +84,13 @@ func select_npc():
 	else:
 		enemy_list.deselect_all()
 		enemy_list.select(current_npc)
+		print_debug("Before wait")
+		await self.wait(2.0)
+		print_debug("After wait")
 		action_log.text = next_character.decide(playerParty.get_alive(), battleData.npc_party)
 		print_debug(action_log.text)
 		self.reload_party_members_list()
 		self.reload_party_member_sprites()
-		print_debug("Before wait")
-		var t = Timer.new() # TODO: Find out why timer is skipped when using function
-		t.set_wait_time(2.0)
-		t.set_one_shot(true)
-		self.add_child(t)
-		t.start()
-		await t.timeout
-		t.queue_free()
-		print_debug("After wait")
 		self.next_turn()
 
 func select_player_character():
@@ -110,7 +104,7 @@ func select_player_character():
 		print_debug("Passing control to NPCs")
 		npc_turn = true
 		current_player_character = -1
-		return self.next_turn()
+		return await self.next_turn()
 	elif !next_character and !playerParty.is_anyone_alive():
 		get_tree().change_scene_to_file("res://game_over/game_over.tscn")
 	
@@ -229,8 +223,11 @@ func next_turn():
 		for i in loot_gold_exp.loot:
 			action_log.text = "Received %s!" % i.name
 			playerParty.inventory_items.append(i)
+			await self.wait(2.0)
 		action_log.text = "Received %s gold!" % loot_gold_exp.gold
+		await self.wait(2.0)
 		action_log.text = "Each party member got %s experience!" % loot_gold_exp.exp
+		await self.wait(2.0)
 		playerParty.add_exp(loot_gold_exp.exp)
 		# TODO: Pause between logs
 		playerParty.gold += loot_gold_exp.gold
