@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="jrpg_godot"
-run/main_scene="res://overworld/overworld.tscn"
+run/main_scene="res://main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 TeleportData="*res://teleport_data.gd"
 PlayerParty="*res://player_party.gd"
 BattleData="*res://battle_data.gd"
+SaveLoadManager="*res://save_load_manager.gd"
 
 [display]
 
@@ -27,10 +28,6 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-
-[gui]
-
-theme/custom="res://ui/blue_theme.tres"
 
 [input]
 

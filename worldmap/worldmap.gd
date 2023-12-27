@@ -5,6 +5,7 @@ class_name WorldMapManager
 @onready var playerParty = get_node("/root/PlayerParty")
 @onready var battleData = get_node("/root/BattleData")
 @onready var teleportData = get_node("/root/TeleportData")
+@onready var saveLoadManager = get_node("/root/SaveLoadManager")
 
 signal toggle_game_paused(is_paused: bool)
 signal toggle_inventory_opened(is_opened: bool)
@@ -26,6 +27,7 @@ var party_info_opened: bool = false
 var trader_opened: bool = false
 var wizard_opened: bool = false
 var save_load_menu_opened: bool = false
+
 
 func _input(event):
 	if (event.is_action_pressed("pause")):
@@ -82,38 +84,11 @@ func close_save_load_menu():
 	emit_signal("toggle_save_load_opened", false)
 
 func save_game(slot_num: int):
-	var save_data = {
-		"party": playerParty.serialize_for_save(),
-		"battleData": battleData.serialize_for_save(),
-		"teleportData": teleportData.serialize_for_save(),
-		"scene": self.serialize_for_save()
-	}
-	
-	print_debug(playerParty.serialize_for_save())
-	print_debug(battleData.serialize_for_save())
-	print_debug(teleportData.serialize_for_save())
-	print_debug(self.serialize_for_save())
-	
-	var save_file = "user://%s.save" % slot_num
-	var file_handle = FileAccess.open(save_file, FileAccess.WRITE)
-	var json = JSON.new()
-	file_handle.store_line(json.stringify(save_data))
-	file_handle.close()
+	var scene_serialized = self.serialize_for_save()
+	saveLoadManager.save_game(slot_num, scene_serialized)
 	
 func load_game(slot_num: int):
-	var save_file = "user://%s.save" % slot_num
-	var file_handle = FileAccess.open(save_file, FileAccess.READ)
-	# TODO: Handle the case when there is no file
-	var json_data = file_handle.get_as_text()
-	var json = JSON.new()
-	var save_data = json.parse_string(json_data)
-	print_debug(save_data)
-	
-	battleData.load_from_save(save_data.battleData)
-	teleportData.load_from_save(save_data.teleportData)
-	playerParty.load_from_save(save_data.party)
-	teleportData.position_from_save = Vector2(save_data.scene.player_pos.x, save_data.scene.player_pos.y)
-	get_tree().change_scene_to_file(save_data.scene.scene)
+	saveLoadManager.load_game(slot_num)
 
 func serialize_for_save():
 	return {

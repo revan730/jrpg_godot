@@ -68,6 +68,9 @@ shape = SubResource("RectangleShape2D_ljurw")
 position = Vector2(91.5, 312)
 shape = SubResource("RectangleShape2D_12e8u")
 
+[node name="inventory_container" parent="gui" index="1"]
+visible = true
+
 [node name="MarginContainer" parent="gui/main_menu_container" index="0"]
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20

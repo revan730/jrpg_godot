@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv1wdfdrj1l81"]
+[gd_scene load_steps=4 format=3 uid="uid://dv1wdfdrj1l81"]
 
 [ext_resource type="Script" path="res://battle/battle.gd" id="1_0quch"]
 [ext_resource type="Texture2D" uid="uid://blhwubhyye76p" path="res://battle/dungeon1.png" id="2_qc0uo"]
+[ext_resource type="Theme" uid="uid://ba76eedavb44n" path="res://ui/blue_theme.tres" id="3_umlwg"]
 
 [node name="battle" type="Node2D"]
 script = ExtResource("1_0quch")
@@ -28,6 +29,7 @@ anchor_bottom = 1.0
 offset_top = -78.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("3_umlwg")
 theme_override_constants/separation = 0
 
 [node name="actions_log_bar" type="PanelContainer" parent="ui/VBoxContainer"]

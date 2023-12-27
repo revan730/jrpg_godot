@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://crx50j8jntrud"]
+
+[ext_resource type="Script" path="res://main_menu/load_game.gd" id="1_yldd2"]
+[ext_resource type="Theme" uid="uid://boq5eh4x7jbpv" path="res://main_menu/main_menu_theme.tres" id="2_150h2"]
+
+[node name="LoadGameScene" type="Node2D"]
+script = ExtResource("1_yldd2")
+
+[node name="load_ui" type="CanvasLayer" parent="."]
+
+[node name="menu_panel" type="PanelContainer" parent="load_ui"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_150h2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="load_ui/menu_panel"]
+layout_mode = 2
+
+[node name="load_slot_1_btn" type="Button" parent="load_ui/menu_panel/VBoxContainer"]
+layout_mode = 2
+text = "Save 1"
+
+[node name="load_slot_2_btn" type="Button" parent="load_ui/menu_panel/VBoxContainer"]
+layout_mode = 2
+text = "Save 2"
+
+[node name="load_slot_3_btn" type="Button" parent="load_ui/menu_panel/VBoxContainer"]
+layout_mode = 2
+text = "Save 3"
+
+[node name="load_slot_4_btn" type="Button" parent="load_ui/menu_panel/VBoxContainer"]
+layout_mode = 2
+text = "Save 4"
+
+[node name="load_slot_5_btn" type="Button" parent="load_ui/menu_panel/VBoxContainer"]
+layout_mode = 2
+text = "Save 5"
+
+[node name="load_slot_6_btn" type="Button" parent="load_ui/menu_panel/VBoxContainer"]
+layout_mode = 2
+text = "Save 6"
+
+[connection signal="pressed" from="load_ui/menu_panel/VBoxContainer/load_slot_1_btn" to="." method="_on_load_slot_1_btn_pressed"]
+[connection signal="pressed" from="load_ui/menu_panel/VBoxContainer/load_slot_2_btn" to="." method="_on_load_slot_2_btn_pressed"]
+[connection signal="pressed" from="load_ui/menu_panel/VBoxContainer/load_slot_3_btn" to="." method="_on_load_slot_3_btn_pressed"]
+[connection signal="pressed" from="load_ui/menu_panel/VBoxContainer/load_slot_4_btn" to="." method="_on_load_slot_4_btn_pressed"]
+[connection signal="pressed" from="load_ui/menu_panel/VBoxContainer/load_slot_5_btn" to="." method="_on_load_slot_5_btn_pressed"]
+[connection signal="pressed" from="load_ui/menu_panel/VBoxContainer/load_slot_6_btn" to="." method="_on_load_slot_6_btn_pressed"]

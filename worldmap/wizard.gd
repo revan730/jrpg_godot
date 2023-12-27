@@ -8,7 +8,7 @@ signal closed
 @onready var inventory_items_list = get_node("MarginContainer/VBoxContainer/inventory_items")
 @onready var item_description_label = get_node("MarginContainer/VBoxContainer/description_and_gold/item_description")
 @onready var gold_label = get_node("MarginContainer/VBoxContainer/description_and_gold/gold_value")
-@onready var message_box = get_tree().get_root().get_child(3).find_child("gui").find_child("message_box") # TODO: Hardcoded, fix
+@onready var message_box = get_tree().get_root().get_child(4).find_child("gui").find_child("message_box") # TODO: Hardcoded, fix
 
 var wizard_stock: Array[Spell] = [Fireball.new(), Lightning.new()]
 

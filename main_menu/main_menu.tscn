@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn0gck1kxn6if"]
+
+[ext_resource type="Theme" uid="uid://boq5eh4x7jbpv" path="res://main_menu/main_menu_theme.tres" id="1_gh38d"]
+[ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_hu6xb"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_hu6xb")
+
+[node name="menu_ui" type="CanvasLayer" parent="."]
+
+[node name="menu_panel" type="PanelContainer" parent="menu_ui"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -52.0
+offset_right = 150.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_gh38d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu_ui/menu_panel"]
+layout_mode = 2
+theme = ExtResource("1_gh38d")
+
+[node name="new_game_btn" type="Button" parent="menu_ui/menu_panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_gh38d")
+text = "New Game"
+
+[node name="load_game_btn" type="Button" parent="menu_ui/menu_panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_gh38d")
+text = "Load Game
+"
+
+[node name="exit_btn" type="Button" parent="menu_ui/menu_panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_gh38d")
+text = "Quit
+"
+
+[connection signal="pressed" from="menu_ui/menu_panel/VBoxContainer/new_game_btn" to="." method="_on_new_game_btn_pressed"]
+[connection signal="pressed" from="menu_ui/menu_panel/VBoxContainer/load_game_btn" to="." method="_on_load_game_btn_pressed"]
+[connection signal="pressed" from="menu_ui/menu_panel/VBoxContainer/exit_btn" to="." method="_on_exit_btn_pressed"]

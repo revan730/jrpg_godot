@@ -5,16 +5,21 @@ extends Node2D
 @onready var battleData = get_node("/root/BattleData")
 
 func _ready():
-	match teleportData.teleported_from:
-		teleportData.Teleports.OVERWORLD_DUNGEON_NORTH:
-			$player.global_position = $teleport_from_north.global_position
-		teleportData.Teleports.OVERWORLD_DUNGEON_SOUTH:
-			$player.global_position = $teleport_from_south.global_position
-	if battleData.return_from_battle:
-		get_node(battleData.enemy_placement_to_remove).queue_free()
-		$player.global_position = battleData.player_party_placement
-		battleData.removed_placements_dungeon.append(battleData.enemy_placement_to_remove)
-		battleData.return_from_battle = false
+	if (teleportData.position_from_save):
+		$player.global_position = teleportData.position_from_save
+		teleportData.position_from_save = Vector2.ZERO
+		get_tree().paused = false
+	else:
+		match teleportData.teleported_from:
+			teleportData.Teleports.OVERWORLD_DUNGEON_NORTH:
+				$player.global_position = $teleport_from_north.global_position
+			teleportData.Teleports.OVERWORLD_DUNGEON_SOUTH:
+				$player.global_position = $teleport_from_south.global_position
+		if battleData.return_from_battle:
+			get_node(battleData.enemy_placement_to_remove).queue_free()
+			$player.global_position = battleData.player_party_placement
+			battleData.removed_placements_dungeon.append(battleData.enemy_placement_to_remove)
+			battleData.return_from_battle = false
 	if battleData.removed_placements_dungeon.size() > 0:
 		for p in battleData.removed_placements_dungeon:
 			get_node(p).queue_free()
