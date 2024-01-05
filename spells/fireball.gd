@@ -9,6 +9,7 @@ func _init():
 	self.info = "Deal 15 points of damage"
 	self.char = PartyMember.Character.Mage
 	self.side = SpellSide.Sides.NPC
+	self.projectile_texture = preload("res://projectiles/fireball.png")
 
 func check_applicable(target: Npc):
 	return true

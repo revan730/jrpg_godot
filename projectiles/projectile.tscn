@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://2ndxmr7v8nqu"]
+
+[ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_ngqw7"]
+[ext_resource type="Texture2D" uid="uid://b2x2rei6qei61" path="res://projectiles/fireball.png" id="1_xbl01"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d2h83"]
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_ngqw7")
+
+[node name="projectile_body" type="CharacterBody2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="projectile_body"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_xbl01")
+
+[node name="collision_shape" type="CollisionShape2D" parent="projectile_body"]
+shape = SubResource("CircleShape2D_d2h83")

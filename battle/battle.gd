@@ -42,15 +42,17 @@ func reload_party_members_list():
 		if member.hp == 0:
 			party_members_list.set_item_custom_fg_color(party_members_list.item_count - 1, Color("#ff0000"))
 
-func remove_children(node: Node):
+func remove_children(node: Node, ignore_child: String):
 	for child in node.get_children():
+		if ignore_child and child.name == ignore_child:
+			continue
 		node.remove_child(child)
 		
 func reload_party_member_sprites():
 	var placements = get_tree().get_nodes_in_group("player_placements")
 	for p in placements:
 		if p.get_child_count() > 0:
-			self.remove_children(p)
+			self.remove_children(p, "")
 	
 	var alive_members = playerParty.get_alive()
 	for i in range(alive_members.size()):
@@ -60,7 +62,7 @@ func reload_enemy_sprites():
 	var placements = get_tree().get_nodes_in_group("enemy_placements")
 	for p in placements:
 		if p.get_child_count() > 0:
-			self.remove_children(p)
+			self.remove_children(p, "collision_area") # Only removing sprites so collision areas are left intact
 	for i in range(battleData.npc_party.size()):
 		placements[i].add_child(battleData.npc_party[i].battle_sprite)
 	
@@ -259,16 +261,31 @@ func action_attack(target_index):
 
 func action_spell_player(target_index):
 	var character = playerParty.members[target_index]
-	self.action_spell(character)
+	await self.action_spell(character, target_index)
 
 func action_spell_npc(target_index):
 	var npc = battleData.npc_party[target_index]
-	self.action_spell(npc)
-
-func action_spell(npc_or_char):
+	await self.action_spell(npc, target_index)
+	
+func launch_spell_projectile(source: Node2D, target: Node2D, spell: Spell):
+	var projectile_texture = spell.projectile_texture
+	assert(projectile_texture, "spell %s doesn't have projectile texture" % spell.name)
+	var target_body = target.get_child(0)
+	var source_pos = source.position
+	var projectile: Projectile = preload("res://projectiles/projectile.tscn").instantiate()
+	projectile.position = source_pos
+	projectile.set_target(target_body)
+	self.add_child(projectile)
+	await projectile.target_hit
+	projectile.queue_free()
+	
+func action_spell(npc_or_char, npc_or_char_index):
 	print_debug("Applying spell on target %s" % npc_or_char)
 	var spell = playerParty.members[current_player_character].spells[spells_list.get_selected_items()[0]]
 	if spell.check_applicable(npc_or_char) and playerParty.members[current_player_character].mp >= spell.mp:
+		var projectile_caster = get_tree().get_nodes_in_group("player_placements")[current_player_character]
+		var projectile_target = get_tree().get_nodes_in_group("enemy_placements")[npc_or_char_index]
+		await self.launch_spell_projectile(projectile_caster, projectile_target, spell)
 		spell.apply(npc_or_char)
 		playerParty.members[current_player_character].mp -= spell.mp
 		self.reload_enemy_list()

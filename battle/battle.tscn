@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dv1wdfdrj1l81"]
+[gd_scene load_steps=8 format=3 uid="uid://dv1wdfdrj1l81"]
 
 [ext_resource type="Script" path="res://battle/battle.gd" id="1_0quch"]
 [ext_resource type="Texture2D" uid="uid://blhwubhyye76p" path="res://battle/dungeon1.png" id="2_qc0uo"]
 [ext_resource type="Theme" uid="uid://ba76eedavb44n" path="res://ui/blue_theme.tres" id="3_umlwg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0cxw"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u40my"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1o6ea"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_njg73"]
+radius = 32.0
 
 [node name="battle" type="Node2D"]
 script = ExtResource("1_0quch")
@@ -181,14 +193,34 @@ item_3/text = "Character 4 10/10 HP 20/20 MP"
 visibility_layer = 3
 position = Vector2(255, 499)
 
+[node name="collision_area" type="Area2D" parent="enemy_placement_0"]
+
+[node name="collision_shape" type="CollisionShape2D" parent="enemy_placement_0/collision_area"]
+shape = SubResource("CircleShape2D_g0cxw")
+
 [node name="enemy_placement_1" type="Node2D" parent="." groups=["enemy_placements"]]
 position = Vector2(255, 582)
+
+[node name="collision_area" type="Area2D" parent="enemy_placement_1"]
+
+[node name="collision_shape" type="CollisionShape2D" parent="enemy_placement_1/collision_area"]
+shape = SubResource("CircleShape2D_u40my")
 
 [node name="enemy_placement_2" type="Node2D" parent="." groups=["enemy_placements"]]
 position = Vector2(255, 670)
 
+[node name="collision_area" type="Area2D" parent="enemy_placement_2"]
+
+[node name="collision_shape" type="CollisionShape2D" parent="enemy_placement_2/collision_area"]
+shape = SubResource("CircleShape2D_1o6ea")
+
 [node name="enemy_placement_3" type="Node2D" parent="." groups=["enemy_placements"]]
 position = Vector2(255, 750)
+
+[node name="collision_area" type="Area2D" parent="enemy_placement_3"]
+
+[node name="collision_shape" type="CollisionShape2D" parent="enemy_placement_3/collision_area"]
+shape = SubResource("CircleShape2D_njg73")
 
 [node name="player_placement_0" type="Node2D" parent="." groups=["player_placements"]]
 position = Vector2(1600, 489)
