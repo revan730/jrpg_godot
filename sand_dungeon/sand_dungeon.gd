@@ -2,6 +2,7 @@ extends Node2D
 
 
 @onready var teleportData = get_node("/root/TeleportData")
+@onready var bgm_player = get_node("bgm_player")
 
 func _ready():
 	match teleportData.teleported_from:
@@ -9,6 +10,8 @@ func _ready():
 			$player.global_position = $teleport_from_north.global_position
 		teleportData.Teleports.OVERWORLD_SAND_DUNGEON_SOUTH:
 			$player.global_position = $teleport_from_south.global_position
+	bgm_player.stream = preload("res://sand_dungeon/bgm.mp3")
+	bgm_player.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

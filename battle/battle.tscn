@@ -234,6 +234,8 @@ position = Vector2(1600, 660)
 [node name="player_placement_3" type="Node2D" parent="." groups=["player_placements"]]
 position = Vector2(1600, 740)
 
+[node name="bgm_player" type="AudioStreamPlayer" parent="."]
+
 [connection signal="pressed" from="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer/attack_btn" to="." method="_on_attack_btn_pressed"]
 [connection signal="pressed" from="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer/magic_btn" to="." method="_on_magic_btn_pressed"]
 [connection signal="pressed" from="ui/VBoxContainer/HBoxContainer/actions/MarginContainer/VBoxContainer/item_btn" to="." method="_on_item_btn_pressed"]

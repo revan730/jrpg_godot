@@ -26,6 +26,10 @@ process_mode = 1
 position = Vector2(234, 179)
 move_speed = 175
 
+[node name="Camera2D" type="Camera2D" parent="level/player"]
+
+[node name="bgm_player" type="AudioStreamPlayer" parent="level"]
+
 [node name="gui" type="CanvasLayer" parent="."]
 
 [node name="party_info_container" type="PanelContainer" parent="gui" node_paths=PackedStringArray("worldMapManager")]

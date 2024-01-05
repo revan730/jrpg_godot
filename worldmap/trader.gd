@@ -10,6 +10,7 @@ signal closed
 @onready var gold_label = get_node("MarginContainer/VBoxContainer/description_and_gold/gold_value")
 @onready var message_box = get_tree().get_root().get_child(4).find_child("gui").find_child("message_box") # TODO: Hardcoded, fix
 
+
 var trader_stock: Array[Item] = [HealthPotion.new(), ManaPotion.new(), PhoenixDown.new()]
 
 var is_selling: bool = true

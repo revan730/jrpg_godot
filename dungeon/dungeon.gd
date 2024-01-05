@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var teleportData = get_node("/root/TeleportData")
 @onready var battleData = get_node("/root/BattleData")
+@onready var bgm_player = get_node("bgm_player")
 
 func _ready():
 	if (teleportData.position_from_save):
@@ -23,6 +24,8 @@ func _ready():
 	if battleData.removed_placements_dungeon.size() > 0:
 		for p in battleData.removed_placements_dungeon:
 			get_node(p).queue_free()
+	bgm_player.stream = load("res://dungeon/bgm.mp3")
+	bgm_player.play()
 
 
 func _on_first_island_tp_body_entered(_body):

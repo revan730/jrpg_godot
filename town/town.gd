@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var teleportData = get_node("/root/TeleportData")
+@onready var bgm_player = get_node("bgm_player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,6 +17,8 @@ func _ready():
 				$player.global_position = $teleport_from_trader.global_position
 			teleportData.Teleports.WIZARD_TOWN:
 				$player.global_position = $teleport_from_wizard.global_position
+	bgm_player.stream = preload("res://town/bgm.mp3")
+	bgm_player.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

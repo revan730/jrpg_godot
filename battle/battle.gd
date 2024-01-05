@@ -13,6 +13,7 @@ extends Node2D
 @onready var items_list = get_node("ui/VBoxContainer/HBoxContainer/items/MarginContainer/items_list")
 @onready var spells_window = get_node("ui/VBoxContainer/HBoxContainer/spells")
 @onready var spells_list = get_node("ui/VBoxContainer/HBoxContainer/spells/MarginContainer/spells_list")
+@onready var bgm_player = get_node("bgm_player")
 
 enum PlayerSelectionActions {
 	Attack,
@@ -113,7 +114,10 @@ func select_player_character():
 	action_menu.visible = true
 	action_attack_btn.grab_focus()
 	party_members_list.select(current_player_character)
-	
+
+func start_bgm():
+	bgm_player.stream = preload("res://battle/bgm.mp3")
+	bgm_player.play()
 
 func _ready():
 	playerParty.reload_battle_sprites()
@@ -122,6 +126,7 @@ func _ready():
 	self.reload_enemy_list()
 	self.reload_enemy_sprites()
 	self.select_player_character()
+	self.start_bgm()
 	
 func load_spells_window(spells: Array[Spell]):
 	action_menu.visible = false
